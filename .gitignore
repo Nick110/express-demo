@@ -1,3 +1,4 @@
 # 忽略项目根目录下的node_modules文件
 /node_modules
 /package-lock.json
+/adminMongo
