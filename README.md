@@ -1,5 +1,20 @@
 # express-demo
 Node.js+MongoDB+Express简单增删改查
+#### 项目结构： 
+├── app.js             // 服务的入口文件（整个项目的运行基础架构，基础的设置）
+├── bin
+│   └── www            // 启动运行（服务端口设置等
+├── db.js              // 连接MongoDB数据库
+├── package.json
+├── public             // 存放静态文件
+│   └── stylesheets
+│       └── style.css
+├── routes             // 服务端路由，node接口在这里
+│   ├── index.js
+│   ├── poet.js
+│   └── users.js
+└── views              // 页面文件（html）
+    └── index.html
 
 #### 如果需要使用adminMongo工具管理MongDB数据库  
 1. npm install admin-mongo
