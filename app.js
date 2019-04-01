@@ -7,7 +7,7 @@ var logger = require('morgan');//http请求日志记录器
 
 var indexRouter = require('./routes/index');//加载路由
 var usersRouter = require('./routes/users');
-var poetsRouter = require('./routes/poet');
+var poetryRouter = require('./routes/poetry');
 var ejs=require('ejs');
 var app = express();//写一个服务
 
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //存放在./routes目录下
 app.use('/', indexRouter);//在app中注册routes接口
 app.use('/users', usersRouter);//app中注册users接口
-app.use('/poets', poetsRouter);
+app.use('/poetry', poetryRouter);
 ///=======路由信息 （接口地址）E ===========//
 
 

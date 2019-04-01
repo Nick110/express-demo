@@ -13,7 +13,7 @@
 
 <body>
   <div class="allCon" style="width: 70%;margin: 0 auto;margin-top: 60px;">
-    <h1 style="text-align: center;">Node.js + MongoDB + Express<br/>简单增删改查</h1>
+    <h1 style="text-align: center;">Node.js + MongoDB + Express</h1>
     <!--新增-->
     <form class="initform" method="post" accept-charset="utf-8">
       <div class="from-group">
@@ -37,6 +37,9 @@
     <!--查询全部-->
     <button class="btn btn-default" id="btn" onclick="searchItem()">查询全部</button>
     <button class="btn btn-success" onclick="searchLibai()">查询李白信息</button>
+    <button class="btn btn-info" onclick="search300('http://localhost:8088/poetry/tangshi300')">查询唐诗三百首</button>
+    <button class="btn btn-info" onclick="search300('http://localhost:8088/poetry/songci300')">查询宋词三百首</button>
+    
     <hr>
     <!--显示数据库信息-->
     <div class="content" onclick="editItem()" style="margin-top: 10px;"></div>
@@ -44,16 +47,16 @@
   </div>
 </body>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
   var global = {};
   $(".cerateform").hide();
   //查询全部数据
   function searchItem() {
     $(".content").empty();
-    $.get('http://localhost:3000/search', function (res) {
+    $.get('http://localhost:8088/search', function (res) {
       console.log(res);
       for (var i = 0; i < res.length; i++) {
         $(".content").append(
@@ -74,7 +77,7 @@
     var obj = {};
     obj.content = $('.createContent').val();
     if (obj.content != '') {
-      $.post('http://localhost:3000/create', obj, function (res) {
+      $.post('http://localhost:8088/create', obj, function (res) {
         console.log('新增成功');
         searchItem();
       })
@@ -86,7 +89,7 @@
   function editItem() {
     if (event.target.nodeName == 'P') {
       var id = event.target.id;
-      $.get('http://localhost:3000/edit?id=' + id, function (res) {
+      $.get('http://localhost:8088/edit?id=' + id, function (res) {
         $('.cerateform').show();
         $('.initform').hide();
         $('.upContent').val(res.content);
@@ -100,7 +103,7 @@
     obj.content = $('.upContent').val();
     obj._id = $('.upid').val();
     if (obj.content != '') {
-      $.post('http://localhost:3000/update', obj, function (res) {
+      $.post('http://localhost:8088/update', obj, function (res) {
         console.log('成功');
         searchItem();
         $('.cerateform').hide();
@@ -113,7 +116,7 @@
   //删除数据
   function deleteItem() {
     var id = event.target.attributes[2].nodeValue;
-    $.get('http://localhost:3000/destroy?id=' + id, function (res) {
+    $.get('http://localhost:8088/destroy?id=' + id, function (res) {
       console.log(res);
       searchItem();
     })
@@ -121,13 +124,20 @@
 
   // 测试：查询诗人李白的数据
   function searchLibai() {
-    $.get('http://localhost:3000/poets/search', function(res) {
+    $.get('http://localhost:8088/poetry/search', function(res) {
       console.log(res)
       $('.poetInfo').append(
         `<img src="${res[0].image}"></img>${res[0].content}`
       )
     })
   }
+
+    // 测试：查询tag包含唐诗300首的诗
+    function search300(url) {
+        $.get(url, function(res) {
+            console.log(res)
+        })
+    }
 </script>
 
 </html>

@@ -1,5 +1,5 @@
 var mongoose = require("mongoose"); // 引入mongoose
-mongoose.connect('mongodb://localhost/classics'); // 连接到mongoDB的runoob数据库
+mongoose.connect('mongodb://localhost/classics'); // 连接到mongoDB的classics数据库
 // 该地址格式：mongodb://[username:password@]host:port/database[?options]
 // 默认port为27017 
 
@@ -19,6 +19,22 @@ var todoSchema = new mongoose.Schema({
 
 var poetSchema = mongoose.Schema({}, {collection: 'poets'})
 
+var poetrySchema = new mongoose.Schema({
+    id: Number,
+    star: Number,
+    name: String,
+    dynasty: String,
+    content: String,
+    fanyi: String,
+    shangxi: String,
+    about: String,
+    poet: Object,
+    tags: Array
+}, 
+{collection: 'poetry'})
+
 mongoose.model('todo', todoSchema); // 将该Schema发布为Model,user就是集合名称
 mongoose.model('poets', poetSchema, 'poets')  // 这里的第三个参数是解决在数据库中集合名会自动变为复数的问题
-module.exports = mongoose;
+mongoose.model('poetry', poetrySchema, 'poetry')
+
+module.exports = mongoose

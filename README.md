@@ -21,7 +21,7 @@ Node.js+MongoDB+Express
 
 #### 启动  
 1. npm start 或者 node bin/www  启动express
-2. 浏览器打开http://localhost:3000/
+2. 浏览器打开http://localhost:8088/
 
 #### 如果需要使用adminMongo可视化工具管理MongDB数据库  
 1. npm install admin-mongo
